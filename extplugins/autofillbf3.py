@@ -17,7 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-
 __version__ = '0.1'
 __author__ = 'Sebastian Ewert'
 
@@ -32,7 +31,9 @@ class Autofillbf3Plugin(Plugin):
         self.console = console
         #check if round is active or not
         self._active = False
-        self._server_size = 4
+        self._server_size = 16
+        self._slots_when_empty = 16
+        self._min_slots = 4
         Plugin.__init__(self, console, config)
 ################################################################################################################
 #
@@ -46,6 +47,8 @@ from the config need to be reset here.
 """
         self.verbose('Loading Autofill Config')
         self._loadServerSize()
+        self._loadMinSlots()
+        self._loadSlotsWhenEmpty()
 
 
     def startup(self):
@@ -85,9 +88,37 @@ Handle intercepted events
 # Privat Stuff
 #
 ################################################################################################################
+    def _loadSlotsWhenEmpty(self):
+        """\
+Load slots to fall back when last user left from config field 
+"""
+        try:
+            self._slots_when_empty = int(self.config.get('preferences', 'slots_when_empty'))
+        except NoOptionError:
+            self.info('No config option \"preferences\\slots_when_empty\" found. Using default value : %s' % self._slots_when_empty)
+        except ValueError, err:
+            self.debug(err)
+            self.warning('Could not read level value from config option \"preferences\\slots_when_empty\". Using default value \"%s\" instead. (%s)' % (self._slots_when_empty, err))
+        except Exception, err:
+            self.error(err)
+        self.info('slots_when_empty is %s' % self._slots_when_empty)
+    def _loadMinSlots(self):
+        """\
+Load minimum slots from config field 
+"""
+        try:
+            self._min_slots = int(self.config.get('preferences', 'min_slots'))
+        except NoOptionError:
+            self.info('No config option \"preferences\\min_slots\" found. Using default value : %s' % self._min_slots)
+        except ValueError, err:
+            self.debug(err)
+            self.warning('Could not read level value from config option \"preferences\\min_slots\". Using default value \"%s\" instead. (%s)' % (self._min_slots, err))
+        except Exception, err:
+            self.error(err)
+        self.info('min_slots is %s' % self._min_slots)
     def _loadServerSize(self):
         """\
-Load server_size config field 
+Load server_size from config field 
 """
         try:
             self._server_size = int(self.config.get('preferences', 'server_size'))
@@ -111,10 +142,10 @@ adjust slots according to rules and current logged in user
         else:
             count_players = len(self.console.clients.getList())
             if count_players == 0:
-                self._setSlots(self._server_size)
+                self._setSlots(self._slots_when_empty)
             elif count_players < self._server_size - 2:
                 #minimum 4 players
-                self._setSlots(max(4, count_players + 2))
+                self._setSlots(max(self._min_slots, count_players + 2))
             else:
                 self.debug("No slots changed, online/serversize  %s/%s" % (count_players, self._server_size))
     def _setSlots(self, count):

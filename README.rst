@@ -32,6 +32,12 @@ slots_when_empty
     if last user leaves your server the slots will be set to this value
 
 
+Support
+-------
+
+http://forum.bigbrotherbot.net/releases/autofill-plugin-for-battlefield-3/
+
+
 Changelog
 ---------
 

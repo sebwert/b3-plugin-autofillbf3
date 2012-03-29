@@ -1,0 +1,102 @@
+#
+# Conquest Small
+#
+MP_001 ConquestSmall0 1         #Grand Bazar
+MP_003 ConquestSmall0 1         #Theran Highway
+MP_007 ConquestSmall0 1         #Caspain Border
+MP_011 ConquestSmall0 1         #Seine Crossing
+MP_012 ConquestSmall0 1         #Operation Firesorm
+MP_013 ConquestSmall0 1         #Damavand Peak
+MP_017 ConquestSmall0 1         #Noshahar Canals
+MP_018 ConquestSmall0 1         #kahrg Island
+MP_Subway ConquestSmall0 1      #operation Metro
+XP1_001  ConquestSmall0 1       #Strike at Karkan
+XP1_002  ConquestSmall0 1       #Gulf of Oman
+XP1_003  ConquestSmall0 1       #Sharqi Peninsula
+XP1_004  ConquestSmall0 1       #Wake Island
+#
+# Conquest Large
+#
+MP_001 ConquestLarge0 1         #Grand Bazar
+MP_003 ConquestLarge0 1         #Theran Highway
+MP_007 ConquestLarge0 1         #Caspain Border
+MP_011 ConquestLarge0 1         #Seine Crossing
+MP_012 ConquestLarge0 1         #Operation Firesorm
+MP_013 ConquestLarge0 1         #Damavand Peak
+MP_017 ConquestLarge0 1         #Noshahar Canals
+MP_018 ConquestLarge0 1         #kahrg Island
+MP_Subway ConquestLarge0 1      #operation Metro
+XP1_001  ConquestLarge0 1       #Strike at Karkan
+XP1_002  ConquestLarge0 1       #Gulf of Oman
+XP1_003  ConquestLarge0 1       #Sharqi Peninsula
+XP1_004  ConquestLarge0 1       #Wake Island
+#
+# Conquest Assault
+#
+XP1_001  ConquestSmall1 1       #Strike at Karkan
+XP1_002  ConquestSmall1 1       #Gulf of Oman
+XP1_003  ConquestSmall1 1       #Sharqi Peninsula
+#
+# Rush
+#
+MP_001 RushLarge0 2     #Grand Bazar
+MP_003 RushLarge0 2     #Theran Highway
+MP_007 RushLarge0 2     #Caspain Border
+MP_011 RushLarge0 2     #Seine Crossing
+MP_012 RushLarge0 2     #Operation Firesorm
+MP_013 RushLarge0 2     #Damavand Peak
+MP_017 RushLarge0 2     #Noshahar Canals
+MP_018 RushLarge0 2     #kahrg Island
+MP_Subway RushLarge0 2  #operation Metro
+XP1_001  RushLarge0 2   #Strike at Karkan
+XP1_002  RushLarge0 2   #Gulf of Oman
+XP1_003  RushLarge0 2   #Sharqi Peninsula
+XP1_004  RushLarge0 2   #Wake Island
+#
+# SquadRush
+#
+MP_001 SquadRush0 2     #Grand Bazar
+MP_003 SquadRush0 2     #Theran Highway
+MP_007 SquadRush0 2     #Caspain Border
+MP_011 SquadRush0 2     #Seine Crossing
+MP_012 SquadRush0 2     #Operation Firesorm
+MP_013 SquadRush0 2     #Damavand Peak
+MP_017 SquadRush0 2     #Noshahar Canals
+MP_018 SquadRush0 2     #kahrg Island
+MP_Subway SquadRush0 2  #operation Metro
+XP1_001  SquadRush0 2   #Strike at Karkan
+XP1_002  SquadRush0 2   #Gulf of Oman
+XP1_003  SquadRush0 2   #Sharqi Peninsula
+XP1_004  SquadRush0 2   #Wake Island
+#
+# Squad Deathmatch
+#
+MP_001 SquadDeathMatch0  1      #Grand Bazar
+MP_003 SquadDeathMatch0  1      #Theran Highway
+MP_007 SquadDeathMatch0  1      #Caspain Border
+MP_011 SquadDeathMatch0  1      #Seine Crossing
+MP_012 SquadDeathMatch0  1      #Operation Firesorm
+MP_013 SquadDeathMatch0  1      #Damavand Peak
+MP_017 SquadDeathMatch0  1      #Noshahar Canals
+MP_018 SquadDeathMatch0  1      #kahrg Island
+MP_Subway SquadDeathMatch0  1   #operation Metro
+XP1_001  SquadDeathMatch0  1    #Strike at Karkan
+XP1_002  SquadDeathMatch0  1    #Gulf of Oman
+XP1_003  SquadDeathMatch0  1    #Sharqi Peninsula
+XP1_004  SquadDeathMatch0  1    #Wake Island
+#
+# Team Deathmatch
+#
+MP_001 Team Deathmatch  1       #Grand Bazar
+MP_003 Team Deathmatch0   1     #Theran Highway
+MP_007 Team Deathmatch0   1     #Caspain Border
+MP_011 Team Deathmatch0   1     #Seine Crossing
+MP_012 Team Deathmatch0   1     #Operation Firesorm
+MP_013 Team Deathmatch0   1     #Damavand Peak
+MP_017 Team Deathmatch0   1     #Noshahar Canals
+MP_018 Team Deathmatch0   1     #kahrg Island
+MP_Subway Team Deathmatch0   1  #operation Metro
+XP1_001  Team Deathmatch0   1   #Strike at Karkan
+XP1_002  Team Deathmatch0   1   #Gulf of Oman
+XP1_003  Team Deathmatch0   1   #Sharqi Peninsula
+XP1_004  Team Deathmatch0   1   #Wake Island

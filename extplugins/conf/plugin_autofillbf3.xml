@@ -19,7 +19,14 @@
 <configuration plugin="autosquad">
 <settings name="preferences">
         <set name="server_size">16</set>
-        <set name="min_slots">4</set>
-        <set name="slots_when_empty">16</set>
+        <set name="min_slots">8</set>
+        <set name="slots_when_empty">8</set>
+
+        <set name="adjust_start_restart_payer_count">On</set><!-- On/Off -->
+
+        <set name="change_maps">Off</set><!-- On/Off -->
+        <set name="maps_many">PATH TO YOUR LARGE MAP FILE</set>
+        <set name="maps_few">PATH TO YOUR TINY MAP FILE</set>
+        <set name="maps_border">4</set>
 </settings>
 </configuration>

@@ -20,6 +20,10 @@
 __version__ = '0.3.1'
 __author__ = 'Sebastian Ewert'
 
+if __name__ == '__main__':
+    import sys
+    sys.path.append('../../../source')
+
 import b3
 import b3.events
 from b3.plugin import Plugin
@@ -44,7 +48,8 @@ class Autofillbf3Plugin(Plugin):
         self._maps_few = ''
         self._maps_current_played = ''
         self._maps_load_error = {'few' : True, 'many' : True}
-        self._maps_border = 10
+        self._border_many = 10
+        self._border_few = 5
         self._maps_parsed = False
         Plugin.__init__(self, console, config)
 ################################################################################################################
@@ -129,7 +134,14 @@ class Autofillbf3Plugin(Plugin):
         self._doLoadVar('end_round_last_player_left', '_do_end_round', 'boolean')
         self._doLoadVar('maps_many', '_maps_many')
         self._doLoadVar('maps_few', '_maps_few')
-        self._doLoadVar('maps_border', '_maps_border', 'int')
+        self._doLoadVar('border_many', '_border_many', 'int')
+        self._doLoadVar('border_few', '_border_few', 'int')
+        #check if many is really more than few
+        if self._border_few > self._border_few:
+            hold_many = self._border_many
+            self._border_many = self._border_few
+            self._border_few = hold_many
+            del hold_many
 ################################################################################################################
 #
 # event wrapper functions
@@ -229,19 +241,12 @@ class Autofillbf3Plugin(Plugin):
                 self.error('mapList.endRound: %s' %  e.message)
             else:
                 self.debug('Last Player left so end Round')
-        if count_players > self._maps_border:
-            if self._maps_current_played == 'many':
-                self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, map border %s', (self._maps_current_played, count_players, self._maps_border))
-                #return if maps many already loaded
-                return True
-            else:
-                self._setMaps('many')
-        else:
-            if self._maps_current_played == 'few':
-                self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, map border %s', (self._maps_current_played, count_players, self._maps_border))
-                #return if maps few already loaded
-                return True
+        if count_players > self._border_many and self._maps_current_played == 'few':
+            self._setMaps('many')
+        elif count_players < self._border_few and self._maps_current_played == 'many':
             self._setMaps('few')
+        else:
+                self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, border_many %s, border_few %s' % (self._maps_current_played, count_players, self._border_many, self._border_few))
 
     def _setMaps(self, map_type):
         #exit if there was an error parsing this map type

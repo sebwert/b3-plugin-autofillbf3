@@ -15,10 +15,10 @@ http://forum.bigbrotherbot.net/battle-field-3/script-for-server-filling/
 - If ``adjust_start_restart_payer_count`` is set to ``On`` in config it will
   change roundStartPlayerCount/roundRestartPlayerCount to 8/4 after the
   round started and set it to 1/0 when the round ends.
-- If ``change_maps`` is set to ``On`` and you have two map files and 
-  write their correct absolute pathes to ``maps_many``, ``maps_few`` 
-  this plugin will change your map rotation when the number of connected user
-  falls under/growth over your ``maps_border``
+- Change maps according to your borders. If player count falls under 
+  the ``border_few`` the ``maps_few`` map rotation is loaded. If the
+  player count rises over ``border_many`` the ``maps_many`` map 
+  rotation is loaded. This way you have a buffer where no maps are changed. 
 
 
 Installation
@@ -58,8 +58,11 @@ maps_many
 maps_few
     absolute path to your map file when few users connected
 
-maps_border
-    If less than this Number of user are connected maps_few is used
+border_many
+    If less than this number of user are connected maps_few is used
+
+border_few
+    If more than this number of user are connected maps_many is used
 
 
 
@@ -107,3 +110,5 @@ Changelog
     add automatic map change according to connected player
 0.3.1
     end current round if last player left with config switch
+0.3.2
+    border for many and few introduced

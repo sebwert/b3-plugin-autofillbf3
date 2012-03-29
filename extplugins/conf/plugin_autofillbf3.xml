@@ -28,6 +28,7 @@
         <set name="end_round_last_player_left">On</set><!-- On/Off -->
         <set name="maps_many">PATH TO YOUR LARGE MAP FILE</set>
         <set name="maps_few">PATH TO YOUR TINY MAP FILE</set>
-        <set name="maps_border">4</set>
+        <set name="border_many">8</set>
+        <set name="border_few">4</set>
 </settings>
 </configuration>

@@ -106,4 +106,4 @@ Changelog
 0.3
     add automatic map change according to connected player
 0.3.1
-    end currend round if last player left with config switch
+    end current round if last player left with config switch

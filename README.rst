@@ -10,14 +10,14 @@ connected player. The idea behind this is to get more quickmatch user.
 The initial forum thread can be found at:
 http://forum.bigbrotherbot.net/battle-field-3/script-for-server-filling/
 
- - The available slots will always be 2 more than the connected player.
- - If ``adjust_start_restart_payer_count`` is set to ``On`` in config it will
-   change roundStartPlayerCount/roundRestartPlayerCount to 8/4 after the
-   round started and set it to 1/0 when the round ends.
- - If ``change_maps`` is set to ``On`` and you have two map files and 
-   write their correct absolute pathes to ``maps_many``, ``maps_few`` 
-   this plugin will change your map rotation when the number of connected user
-   falls under/growth over your ``maps_border``
+- The available slots will always be 2 more than the connected player.
+- If ``adjust_start_restart_payer_count`` is set to ``On`` in config it will
+  change roundStartPlayerCount/roundRestartPlayerCount to 8/4 after the
+  round started and set it to 1/0 when the round ends.
+- If ``change_maps`` is set to ``On`` and you have two map files and 
+  write their correct absolute pathes to ``maps_many``, ``maps_few`` 
+  this plugin will change your map rotation when the number of connected user
+  falls under/growth over your ``maps_border``
 
 
  Installation
@@ -64,10 +64,12 @@ or any lines with another beginning as "mapname gamemode rounds". Only the
 battlefield 3 server map names are allowed!
 
 MP_003 ConquestSmall0 1         #Theran Highway
+
 The line above is allowd cause the parser will stop after the number of rounds. 
 There you can write comments
 
 #Theran Highway  MP_003 ConquestSmall0 1
+
 The line above will lead to an error cause the parser is not able to recognise
 that the first element is not the map name
 

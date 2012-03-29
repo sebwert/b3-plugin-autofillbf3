@@ -43,14 +43,15 @@ class Autofillbf3Plugin(Plugin):
         self._do_rs = True
         self._do_change_maps = False
         self._do_end_round = True
-        self._maps = {'many' : [], 'few' : []}
+        self._maps = {}
         self._maps_many = ''
         self._maps_few = ''
-        self._maps_current_played = ''
+        self._maps_current = ''
         self._maps_load_error = {'few' : True, 'many' : True}
+        self._maps_parsed = False
+        self._maps_first_change = True
         self._border_many = 10
         self._border_few = 5
-        self._maps_parsed = False
         Plugin.__init__(self, console, config)
 ################################################################################################################
 #
@@ -241,12 +242,20 @@ class Autofillbf3Plugin(Plugin):
                 self.error('mapList.endRound: %s' %  e.message)
             else:
                 self.debug('Last Player left so end Round')
-        if count_players > self._border_many and self._maps_current_played == 'few':
+        if count_players > self._border_many and self._maps_first_change:
             self._setMaps('many')
-        elif count_players < self._border_few and self._maps_current_played == 'many':
+            self._maps_first_change = False
+            self.debug('first connect: maps "many" loaded, %s player connected, border_many: %s.' % (count_players, self._border_many))
+        elif count_players <= self._border_many and self._maps_first_change:
+            self._setMaps('few')
+            self._maps_first_change = False
+            self.debug('first connect: maps "few" loaded, %s player connected, border_many: %s.' % (count_players, self._border_many))
+        elif count_players > self._border_many and self._maps_current == 'few':
+            self._setMaps('many')
+        elif count_players < self._border_few and self._maps_current == 'many':
             self._setMaps('few')
         else:
-                self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, border_many %s, border_few %s' % (self._maps_current_played, count_players, self._border_many, self._border_few))
+            self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, border_many %s, border_few %s' % (self._maps_current, count_players, self._border_many, self._border_few))
 
     def _setMaps(self, map_type):
         #exit if there was an error parsing this map type
@@ -266,12 +275,13 @@ class Autofillbf3Plugin(Plugin):
                     self.error('mapList.add: %s/%s/%s: %s' % (map[0], map[1], map[2], e.message))
                 else:
                     self.debug('mapList.add: %s/%s/%s' % (map[0], map[1], map[2]))
-                    self._maps_current_played = map_type
+                    self._maps_current = map_type
             try:
                 self.console.write(('mapList.setNextMapIndex', 0))
             except CommandFailedError, e:
                 self.error('mapList.setNextMapIndex: %s' % e.message)
     def _parseMaps(self):
+        self._maps = {'many' : [], 'few' : []}
         try:
             file_many = open(self._maps_many, "r").readlines()
         except IOError:
@@ -281,7 +291,7 @@ class Autofillbf3Plugin(Plugin):
             for line in file_many:
                 self._maps['many'].append(line.split(' ', 3))
             self._maps_load_error['many'] = False
-            self.debug('File %s succesfully opened' % file_many)
+            self.debug('File "%s" succesfully opened' % self._maps_many)
         try:
             file_few = open(self._maps_few, "r").readlines()
         except IOError:
@@ -291,8 +301,8 @@ class Autofillbf3Plugin(Plugin):
             for line in file_few:
                 self._maps['few'].append(line.split(' ', 3))
             self._maps_load_error['few'] = False
-            self.debug('File %s succesfully opened' % file_few)
-        if not self._maps_load_error['many'] and not self._maps_load_error['few']:
+            self.debug('File "%s" succesfully opened' % self._maps_few)
+        if self._maps_load_error['many'] or self._maps_load_error['few']:
             self._maps_parsed = True
             self.info('There was at least one error opening your map files many/few %s/%s' % (self._maps_load_error['many'], self._maps_load_error['few']))
 ################################################################################################################
@@ -341,22 +351,24 @@ if __name__ == '__main__':
     
     p.onEvent(event_start)
     joe.connects(cid = 1)
+#    p.onEvent(event_join)
     simon.connects(cid = 2)
+#    p.onEvent(event_join)
     moderator.connects(cid = 3)
-    p.onEvent(event_join)
+#    p.onEvent(event_join)
     superadmin.connects(cid=4)
-    p.onEvent(event_join)
+#    p.onEvent(event_join)
     reg.connects(cid=5)
     p.onEvent(event_join)
 
     joe.disconnects()
-    p.onEvent(event_leave)
+#    p.onEvent(event_leave)
     moderator.disconnects()
-    p.onEvent(event_leave)
+#    p.onEvent(event_leave)
     superadmin.disconnects()
-    p.onEvent(event_leave)
+#    p.onEvent(event_leave)
     reg.disconnects()
-    p.onEvent(event_leave)
+#    p.onEvent(event_leave)
     simon.disconnects()
-    p.onEvent(event_leave)
+#    p.onEvent(event_leave)
 

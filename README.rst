@@ -1,6 +1,7 @@
 Autofill Battlefield 3 for Big Brother Bot
 ==========================================
 
+
 Description
 -----------
 
@@ -56,6 +57,8 @@ maps_few
 maps_border
     If less than this Number of user are connected maps_few is used
 
+
+
 Map Files:
 ~~~~~~~~~~
 
@@ -79,17 +82,13 @@ No empty lines and the fomat described above. The maps.all.txt file is a file wi
 all combinations of game modes and map names that are allowed in battlefield 3 at the
 time. please have a speacial look at the expansion set maps.
 
+
 Support
 -------
 
 Support will only be given at the bigbrother forum:
+
 http://forum.bigbrotherbot.net/releases/autofill-plugin-for-battlefield-3
-
-
-Support
--------
-
-http://forum.bigbrotherbot.net/releases/autofill-plugin-for-battlefield-3/
 
 
 Changelog

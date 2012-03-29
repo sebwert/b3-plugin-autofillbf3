@@ -20,9 +20,6 @@
 __version__ = '0.3.1'
 __author__ = 'Sebastian Ewert'
 
-import sys
-sys.path.append('/home/basti/Documents/bigbrotherserver/source/')
-
 import b3
 import b3.events
 from b3.plugin import Plugin

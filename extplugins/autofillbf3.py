@@ -17,9 +17,11 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 #
-__version__ = '0.3'
+__version__ = '0.3.1'
 __author__ = 'Sebastian Ewert'
 
+import sys
+sys.path.append('/home/basti/Documents/bigbrotherserver/source/')
 
 import b3
 import b3.events
@@ -39,6 +41,7 @@ class Autofillbf3Plugin(Plugin):
         #change roundStart/RestartPlayerCount
         self._do_rs = True
         self._do_change_maps = False
+        self._do_end_round = True
         self._maps = {'many' : [], 'few' : []}
         self._maps_many = ''
         self._maps_few = ''
@@ -126,6 +129,7 @@ class Autofillbf3Plugin(Plugin):
         self._doLoadVar('server_size', '_server_size', 'int')
     def _loadMaps(self):
         self._doLoadVar('change_maps', '_do_change_maps', 'boolean')
+        self._doLoadVar('end_round_last_player_left', '_do_end_round', 'boolean')
         self._doLoadVar('maps_many', '_maps_many')
         self._doLoadVar('maps_few', '_maps_few')
         self._doLoadVar('maps_border', '_maps_border', 'int')
@@ -214,26 +218,38 @@ class Autofillbf3Plugin(Plugin):
 ################################################################################################################
     def _handleMaps(self):
         if not self._do_change_maps:
+            self.debug('_do_change_maps is %s map change aborted' % self._do_change_maps)
             return True
         #parse maps if not already parsed or forced to parse
         if not self._maps_parsed:
             self._parseMaps()
         count_players = len(self.console.clients.getList())
+        #If las player left end round
+        if count_players == 0 and self._do_end_round:
+            try:
+                self.console.write(('mapList.endRound', 1))
+            except CommandFailedError, e:
+                self.error('mapList.endRound: %s' %  e.message)
+            else:
+                self.debug('Last Player left so end Round')
         if count_players > self._maps_border:
             if self._maps_current_played == 'many':
                 self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, map border %s', (self._maps_current_played, count_players, self._maps_border))
+                #return if maps many already loaded
                 return True
             else:
                 self._setMaps('many')
         else:
             if self._maps_current_played == 'few':
                 self.debug('NO MAP LOADED: Loaded maps are %s, connected players %s, map border %s', (self._maps_current_played, count_players, self._maps_border))
+                #return if maps few already loaded
                 return True
             self._setMaps('few')
+
     def _setMaps(self, map_type):
         #exit if there was an error parsing this map type
         if self._maps_load_error[map_type]:
-            self.debug('%s setMaps abortet because off previous map file error')
+            self.debug('setMaps abortet because off previous map file error')
             return True
         try:
             self.console.write(('mapList.clear',))
@@ -290,7 +306,7 @@ if __name__ == '__main__':
     from b3.fake import joe, simon, moderator, superadmin, reg, admin
     import time
     config = XmlConfigParser() 
-    config.load('../conf/plugin_autofillbf3.xml')
+    config.load('conf/plugin_autofillbf3.xml.test')
     event_start = type('lamdbaobject', (object,), {'type' :  b3.events.EVT_GAME_ROUND_START})()
     event_end = type('lamdbaobject', (object,), {'type' :  b3.events.EVT_GAME_ROUND_END})()
     event_join = type('lamdbaobject', (object,), {'type' :  b3.events.EVT_CLIENT_JOIN})()
@@ -333,6 +349,12 @@ if __name__ == '__main__':
 
     joe.disconnects()
     p.onEvent(event_leave)
-    admin.disconnects()
+    moderator.disconnects()
+    p.onEvent(event_leave)
+    superadmin.disconnects()
+    p.onEvent(event_leave)
+    reg.disconnects()
+    p.onEvent(event_leave)
+    simon.disconnects()
     p.onEvent(event_leave)
 

@@ -47,6 +47,10 @@ adjust_start_restart_payer_count
 change_maps
     ''On/Off'' enables map according to the connected user
 
+end_round_last_player_left
+    ''On/Off'' plugin ends round when last player lefts. Makes faster
+    switch to maps_few if all player leave in one round.
+
 maps_many
     absolute path to your map file when many users connected
 
@@ -100,4 +104,5 @@ Changelog
     add mechanism to change roundStartPlayerCount/roundRestartPlayerCount
 0.3
     add automatic map change according to connected player
-
+0.3.1
+    end curend round if last player left with config switch

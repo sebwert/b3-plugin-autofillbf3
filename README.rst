@@ -84,6 +84,12 @@ Support will only be given at the bigbrother forum:
 http://forum.bigbrotherbot.net/releases/autofill-plugin-for-battlefield-3
 
 
+Support
+-------
+
+http://forum.bigbrotherbot.net/releases/autofill-plugin-for-battlefield-3/
+
+
 Changelog
 ---------
 

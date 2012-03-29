@@ -20,7 +20,7 @@ http://forum.bigbrotherbot.net/battle-field-3/script-for-server-filling/
   falls under/growth over your ``maps_border``
 
 
- Installation
+Installation
 ------------
 
 - copy extplugins stuff into b3/extplugins

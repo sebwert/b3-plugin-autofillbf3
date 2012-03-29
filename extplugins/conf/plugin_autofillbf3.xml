@@ -22,7 +22,7 @@
         <set name="min_slots">8</set>
         <set name="slots_when_empty">8</set>
 
-        <set name="adjust_start_restart_payer_count">On</set><!-- On/Off -->
+        <set name="adjust_start_restart_payer_count">Off</set><!-- On/Off -->
 
         <set name="change_maps">Off</set><!-- On/Off -->
         <set name="end_round_last_player_left">On</set><!-- On/Off -->
